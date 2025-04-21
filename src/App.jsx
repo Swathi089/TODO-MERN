@@ -31,6 +31,8 @@ function App() {
   const deleteTask = (id) => {
     const newTasks = tasks.filter(task => task.id !== id);
     setTasks(newTasks);
+    localStorage.setItem('tasks',JSON.stringify(newTasks))
+    
   };
 
   const editTask = (id, newDescription) => {
