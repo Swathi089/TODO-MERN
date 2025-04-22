@@ -1,13 +1,12 @@
-const express =require("express");
-const router=express.Router();
-const TodoController =require("../todoController")
+// todoRoutes.js
+const express = require("express");
+const router = express.Router(); // create a router
+const todoController = require("../controllers/todoController");
 
-router.get("/",todoController.getAllTodos);
-
-router.post("/",todoController.createTodo);
-
+// Your routes
+router.get("/", todoController.getAllTodos);
+router.post("/", todoController.createTodo);
 router.put("/:id", todoController.updateTodo);
+router.delete("/:id", todoController.deleteTodo);
 
-router.delete("/:id",todoController.deleteTodo);
-
-module.exports = router;
+module.exports = router; // Make sure you export the router
