@@ -6,7 +6,7 @@ import TaskPage from './components/TaskPage';
 function App() {
   const [search, setSearch] = useState('');
   const [tasks, setTasks] = useState(
-    JSON.parse(localStorage.getItem('tasks'))||[ ]
+    JSON.parse(localStorage.getItem('tasks')) || []
   );
 
   const submitTask = (search) => {
@@ -17,40 +17,48 @@ function App() {
       completed: false,
     };
     setTasks([...tasks, newTask]);
-    localStorage.setItem('tasks',JSON.stringify([...tasks,newTask]))
+    localStorage.setItem('tasks', JSON.stringify([...tasks, newTask]));
   };
 
   const completeTask = (id) => {
     const newTasks = tasks.map((task) =>
       task.id === id ? { ...task, completed: !task.completed } : task
     );
-    setTasks(newTasks)
-    localStorage.setItem('tasks',JSON.stringify(newTasks))
+    setTasks(newTasks);
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
   };
 
   const deleteTask = (id) => {
-    const newTasks = tasks.filter(task => task.id !== id);
+    const newTasks = tasks.filter((task) => task.id !== id);
     setTasks(newTasks);
-    localStorage.setItem('tasks',JSON.stringify(newTasks))
-    
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
   };
 
   const editTask = (id, newDescription) => {
-    const newTasks = tasks.map(task => {
+    const newTasks = tasks.map((task) => {
       if (task.id === id) {
         return { ...task, description: newDescription };
       }
       return task;
     });
     setTasks(newTasks);
-    localStorage.setItem( 'tasks',JSON.stringify(newTasks))
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
   };
 
   return (
-    <div>
-      <header className="text-center text-3xl font-bold my-4">TODO-Mern</header>
-      <Search search={search} setSearch={setSearch} submitTask={submitTask} />
-      <TaskPage tasks={tasks} completeTask={completeTask} deleteTask={deleteTask} editTask={editTask} />
+    <div className="bg-gray-100 min-h-screen">
+      <header className="text-center text-3xl font-bold my-4 text-blue-600">
+        TODO-Mern
+      </header>
+      <div className="max-w-2xl mx-auto p-4 bg-white shadow-md rounded-md">
+        <Search search={search} setSearch={setSearch} submitTask={submitTask} />
+        <TaskPage
+          tasks={tasks}
+          completeTask={completeTask}
+          deleteTask={deleteTask}
+          editTask={editTask}
+        />
+      </div>
     </div>
   );
 }
